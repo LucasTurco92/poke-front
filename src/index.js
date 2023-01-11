@@ -1,13 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import Home from '../src/pages/home';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import "./App.scss";
 
-ReactDOM.render( <
-    React.StrictMode >
-    <
-    Home / >
-    <
-    /React.StrictMode>,
-    document.getElementById('root')
-);
+const el = document.getElementById("app");
+
+ReactDOM.render(<App />, el);
