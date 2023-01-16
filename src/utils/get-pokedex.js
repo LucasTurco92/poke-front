@@ -3,11 +3,8 @@ const endpoint = process.env.POKEMON_ENDPOINT;
 
 
 const getPokedex = async () =>{
-    //const pokemon = await axios.get(`${endpoint}`);
-    const pokemon = await axios.get('http://localhost:5000');
-    
-    console.log(process.env);
-        console.log(process.env.TEST);
+    const {data:pokemon} = await axios.get(`${endpoint}`);
+
     return pokemon;
 }
 

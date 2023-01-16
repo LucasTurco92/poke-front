@@ -1,3 +1,4 @@
+const Dotenv = require('dotenv-webpack');
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -9,6 +10,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "src/index.html", // to import index.html file inside index.js
+    }),
+    new Dotenv({
+      path: path.resolve(__dirname, '.env'),
+      systemvars: true,
     }),
   ],
   devServer: {
@@ -28,13 +33,35 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
-        test: /\.(png|jpg|svg)$/,
-        include: path.join(__dirname, 'assets/images'),
-        loader: 'file-loader',
-        options: {
-          name: '[path][name].[ext]',
-        },
-      },
+        test: /\.(gif|png|jpe?g|svg|webp)$/i,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              name: '[path][name].[ext]',
+              mozjpeg: {
+                progressive: true,
+              },
+              // optipng.enabled: false will disable optipng
+              optipng: {
+                enabled: false,
+              },
+              pngquant: {
+                quality: [0.65, 0.9],
+                speed: 4,
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              // the webp option will enable WEBP
+              webp: {
+                quality: 75,
+              },
+            },
+          },
+        ],
+      },   
     ],
   },
 };
