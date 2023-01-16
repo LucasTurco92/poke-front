@@ -8,20 +8,17 @@ const Pokedex = ({}) =>{
     const [ pokemon, setPokemon ] = useState({sprite:'',
                                                 name:''});
     
-       useEffect(()=>{
-        
-            const getContent = async ()=>{
-                const content = await getPokedex();
-                const {sprite,name} = content;
+    //    useEffect(()=>{
+    //         const getContent = async ()=>{
+    //         const content = await getPokedex();
+    //         const {sprite,name} = content;
+    //         setPokemon({sprite:sprite,name:name
+    //                     });
 
-                setPokemon({sprite:sprite,
-                            name:name
-                           });
-
-            } 
-            getContent();
+    //         } 
+    //         getContent();
             
-        },[]);
+    //     },[]);
    
     return (
         <div className='pokedexContainer'>

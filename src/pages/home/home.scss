@@ -2,8 +2,15 @@
     backdrop-filter: blur(2px);
     display: flex;
     justify-content: center;
+    border-bottom:#f7eee7 solid;
+
 }
 
 .pokeball{
     height: 50px;
+}
+
+.content {
+    display: flex;
+    flex-direction:column;
 }
