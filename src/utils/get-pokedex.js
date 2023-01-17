@@ -1,11 +1,18 @@
 import axios from 'axios';
 const endpoint = process.env.POKEMON_ENDPOINT;
+const max = process.env.POKEMON_MAX;
+const min = 1;
 
 
-const getPokedex = async () =>{
-    const {data:pokemon} = await axios.get(`${endpoint}`);
+export const getPokedex = async (number) =>{
+    const {data:pokemon} = await axios.get(`${endpoint}pokemon/${number}`);
 
     return pokemon;
 }
 
-export default getPokedex;
+
+
+export const getRandomNumber = () => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+

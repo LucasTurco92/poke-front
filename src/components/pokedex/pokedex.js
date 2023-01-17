@@ -5,7 +5,7 @@ import './pokedex.scss'
 import PokeFont from "../poke-font/poke-font";
 
 const Pokedex = () =>{
-    const  {pokemonContext } = useContext(PokemonContext);
+    const {pokemonContext } = useContext(PokemonContext);
 
     return (
         <div className='pokedexContainer'>
