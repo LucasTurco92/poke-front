@@ -2,9 +2,11 @@ import './search-box.scss';
 import React,{ useState,useRef,useEffect,useContext } from 'react';
 import { getPokedex,getRandomNumber } from '../../utils/get-pokedex';
 import { PokemonContext } from '../../hooks/usePokemon.jsx';
+const max = process.env.POKEMON_MAX;
+const min = 1;
 
-const PokeSearch = ({value}) =>{
-    const [inputItem, setInputItem] = useState();
+const PokeSearch = () =>{
+    const [inputItem, setInputItem] = useState('');
     const {setPokemonContext}  = useContext(PokemonContext);
     const inputElement = useRef();
 
@@ -14,8 +16,7 @@ const PokeSearch = ({value}) =>{
       };
 
     useEffect(()=>{
-
-      getContent(getRandomNumber());
+      getContent(getRandomNumber(min, max));
     },[]);
 
 

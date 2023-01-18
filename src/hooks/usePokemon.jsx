@@ -13,7 +13,7 @@ const PokemonProvider = (props) => {
           const { data } = await axios.get(`${endpoint}pokemon`);
           setPokemons(data);
         }
-        fetchData();
+         fetchData();
       }, []);
 
     return (
