@@ -31,3 +31,30 @@
     width: 38px;
     padding: 3px;
 }
+
+.suggestions{
+    position: absolute;
+    z-index: 7;
+    width: 400px;
+    display: block;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #fff;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 30px;
+    background-color: #fff;
+    list-style-type: none;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-top: none;
+    top:11%;
+    color: gray;
+    li:hover{
+        background-color: #000;
+        color:#fff;
+    }
+}

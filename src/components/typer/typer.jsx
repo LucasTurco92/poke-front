@@ -14,13 +14,13 @@ const Typer = ({ text }) => {
     if (typing) {
       const intervalId = setInterval(() => {
         setIndex(index + 1);
-      }, 100);
+      },80);
       return () => clearInterval(intervalId);
     }
   }, [index, typing, text]);
 
   useEffect(() => {
-    if (index === text.length) {
+    if (index === text?.length) {
       setTyping(false);
     }
   }, [index, text]);

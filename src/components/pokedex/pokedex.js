@@ -1,6 +1,5 @@
 import React,{ useContext,useEffect,useState }  from "react";
 import { PokemonContext } from "../../hooks/usePokemon.jsx";
-import pokedexImg from "../../assets/images/pokedex.webp";
 import './pokedex.scss'
 import ImageWithSpinner from "../ImageWithSpinner/ImageWithSpinner.jsx";
 import Typer from "../typer/typer.jsx";
@@ -13,7 +12,7 @@ const Pokedex = () =>{
                                             entry:'',     
                                             sprite:''});
     const getEntry =(entries)=>{
-        return entries[getRandomNumber(0,entries.length )];
+        return entries[getRandomNumber(0,entries?.length )];
     } 
 
     useEffect(()=>{
@@ -26,11 +25,8 @@ const Pokedex = () =>{
     },[pokemonContext])
 
 
-
-    console.log();
     return (
         <div className='pokedexContainer'>
-            <img className='pokedex' src={pokedexImg}/>
             <div className='pokeSquare'>
                 <div className='pokemon'>
                      <ImageWithSpinner src={pokemon.sprite|| ''}/>
