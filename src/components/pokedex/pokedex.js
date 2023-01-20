@@ -8,7 +8,7 @@ import { getRandomNumber } from "../../utils/get-pokedex.js";
 
 const Pokedex = () =>{
     const {pokemonContext } = useContext(PokemonContext);
-    const [ pokemon, setPokemon ] = useState({name:'',
+    const [ pokemon, setPokemon ] = useState({name:null,
                                             entry:'',     
                                             sprite:''});
     const getEntry =(entries)=>{
@@ -18,7 +18,7 @@ const Pokedex = () =>{
     useEffect(()=>{
         const {name, sprite,number, entries = []} =pokemonContext;
         setPokemon({name: name,
-                    entry:name?getEntry(entries):'', 
+                    entries: entries, 
                     sprite:sprite,
                     number:number
                 });
@@ -30,17 +30,16 @@ const Pokedex = () =>{
         <div className='pokedexContainer'>
             <div className="pokedexMark">
                 <div className="upperPartRed">
-                    <div className="upperPartLeft">
-                    <div className="bigBallWhite">
-                        <div className="bigBallBlue">
-                            <div className="square"/>
-                            <div className="smallBallBlue">
+                    <div className="upperPart">
+                        <div className="bigBallWhite">
+                            <div className="bigBallBlue">
+                                <div className="square"/>
+                                <div className="smallBallBlue"/>
+                         </div>
                         </div>
-                        </div>
-                    </div>
                     </div>
             
-                    <div className="upperPartRight">
+                    <div className="upperPart">
                         <div className="smallBall">
                             <div className="square"/>
                         </div>
@@ -85,11 +84,11 @@ const Pokedex = () =>{
             </div>
             <div className='details'>
                 <div className='pokeName'>
-                <span>{pokemon.name ? `${pokemon.name} #${pokemon?.number}` : 'Loading...'}</span>
+                    <span>{pokemon.name ? `${pokemon.name} #${pokemon?.number}` : 'Loading...'}</span>
                 </div>
                 
                 <div className='detailSquare'>
-                    <Typer text={pokemon.entry}/>
+                    <Typer text={pokemon?.entries?.length > 0 ? getEntry(pokemonContext.entries) :''}/>
                 </div>
             </div>
         </div>

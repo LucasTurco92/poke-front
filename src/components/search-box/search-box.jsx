@@ -10,17 +10,29 @@ const min = 1;
 const PokeSearch = () =>{
     const [inputItem, setInputItem] = useState('');
     const [suggestionsPokemon, setSuggestionsPokemon] = useState([]);
-    const [selectedPokemon,setSelectedPokemon] = useState({});
-    const {setPokemonContext, pokemons} = useContext(PokemonContext);
+    const [showSuggestion,setShowSuggestion] = useState(false);
+    const { pokemonContext,setPokemonContext, pokemons } = useContext(PokemonContext);
 
     const inputElement = useRef();
 
     const getContent = async (number)=>{
-      const content = await getPokedex(number);
-      setPokemonContext({...content,number:number});
-      };
+      if(number != pokemonContext.number){
+        const content = await getPokedex(number);
+        const pokemon = {...content,number:number};
+        setPokemonContext(pokemon);
+        setShowSuggestion(false);
+      }else{
+
+        setPokemonContext({...pokemonContext,
+                              number:number});
+      }
+
+      setSuggestionsPokemon([]);
+    };
   
      const getRandomPokemon=()=>{
+      setShowSuggestion(false);
+      setInputItem('');
       getContent(getRandomNumber(min, max));
      }
 
@@ -37,41 +49,38 @@ const PokeSearch = () =>{
     const selectedOption = async(e,selected)=>{
       await getContent(selected.number);
       e.preventDefault();
-      setInputItem(selected.name)
-      setSuggestionsPokemon([]);
+      setInputItem(selected.name);
     } 
-
-
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      await getContent(suggestionsPokemon[0]?.number ||getRandomNumber(min, max));
-      setSuggestionsPokemon([]);
+
+      if(inputItem && suggestionsPokemon.length > 0 ){
+        await getContent(suggestionsPokemon[0]?.number);
+        setInputItem(suggestionsPokemon[0]?.name);
+      }
     };
 
     return (
-       <form className='searchBoxContainer'
-                onSubmit={handleSubmit}>
-                <input 
-                type='text'
-                className='searchBox'
-                value={inputItem}
-                ref={inputElement}
-                onChange={(e) => setInputItem(e.target.value)}
-                placeholder='Search...'/>
-                {suggestionsPokemon.length > 0 && inputItem != ''?
-                (<ul className='suggestions'>
-                {suggestionsPokemon.map(suggestion => (
-                  <li key={suggestion.number}
-                  onClick={(e)=>{selectedOption(e,suggestion)} }>{suggestion.name}</li>
-                ))}
-              </ul>): <></>}
-              <img src={srcIcon} className='button' onClick={handleSubmit}/>
-              <img src={rndIcon} className='button' onClick={getRandomPokemon}/>
-              
-            </form >
-   );
-
+      <form className='searchBoxContainer'
+              onSubmit={handleSubmit}>
+              <input 
+              type='text'
+              className='searchBox'
+              value={inputItem}
+              ref={inputElement}
+              onChange={(e) => {setInputItem(e.target.value);e.target.value ? setShowSuggestion(true):setShowSuggestion(false)}}
+              placeholder='Search...'/>
+              {showSuggestion && suggestionsPokemon.length > 0 ?
+              (<ul className='suggestions'>
+              {suggestionsPokemon.map(suggestion => (
+                <li key={suggestion.number}
+                onClick={(e)=>{selectedOption(e,suggestion)} }>{suggestion.name}</li>
+              ))}
+            </ul>): <></>}
+            <img src={srcIcon} className='button' onClick={handleSubmit}/>
+            <img src={rndIcon} className='button' onClick={getRandomPokemon}/>
+          </form >);
 }
 
 export default PokeSearch;

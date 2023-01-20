@@ -1,6 +1,6 @@
 .pokedexContainer {
     width: 750px;
-    margin: 50px auto 0 auto;
+    margin: 200px auto 0 auto;
     position: relative;
     display: flex;
     flex-wrap: nowrap;
@@ -21,9 +21,7 @@
         z-index: 1;
         height: 100%;
         object-fit: cover;
-
     }
-
 }
 .pokeName{
     font-size: 30px;
@@ -43,7 +41,7 @@
     z-index: 5;
     width: 300px;
     height: 200px;
-    background: #80aad1;
+    background:#585858;
     border: 4px solid #000;
     border-radius: 10px;
     align-self: center;
@@ -107,7 +105,6 @@
     border: 3px solid #000;
     border-radius: 10px;
   }
-
 
   @mixin sball($color, $size) {  
     margin: 5px 0;
@@ -188,20 +185,10 @@
     justify-content: center;
     margin: 5px 0;
   }
+
   .upperPartRed{
-    display: flex;
+    @extend .upperPart;
     justify-content: flex-start;
-    margin: 5px 0;
-  }
-  .upperPartRight{
-    display: flex;
-    justify-content: center;
-    margin: 5px 0;
-  }
-  .upperPartLeft{
-    display: flex;
-    justify-content: center;
-    margin: 5px 0;
   }
 
  .line{
