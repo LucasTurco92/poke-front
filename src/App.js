@@ -1,9 +1,11 @@
 import React from "react";
 import Home from './pages/home/home';
-import image from './assets/images/back.png';
+
 const App = () => {
 
-  return (<div style={{ backgroundImage:`url(${image})` , backgroundAttachment:"fixed",height:"100vh",width:"100vw" }}>
+  return (<div style={{
+    backgroundColor:'#50c8c7',height:"100vh",width:"100vw" 
+     }}>
     <Home/>
     </div>);
 };
