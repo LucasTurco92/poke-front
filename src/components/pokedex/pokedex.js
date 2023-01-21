@@ -7,23 +7,25 @@ import { getRandomNumber } from "../../utils/get-pokedex.js";
 
 
 const Pokedex = () =>{
-    const {pokemonContext } = useContext(PokemonContext);
-    const [ pokemon, setPokemon ] = useState({name:null,
+    const {pokemon, blinkPokedex,setBlinkPokedex,spriteError } = useContext(PokemonContext);
+    const [ pokemonPokedex, setPokemonPokedex ] = useState({name:null,
                                             entry:'',     
-                                            sprite:''});
+                                            sprite:'',
+                                            spriteError:''});
     const getEntry =(entries)=>{
-        return entries[getRandomNumber(0,entries?.length )];
+        return entries[getRandomNumber(0,entries?.length-1)];
     } 
 
     useEffect(()=>{
-        const {name, sprite,number, entries = []} =pokemonContext;
-        setPokemon({name: name,
-                    entries: entries, 
+        const {name, sprite,number, entries= [], spriteError} =pokemon;
+        setBlinkPokedex(true);
+        setPokemonPokedex({name: name,
+                    entry: getEntry(entries), 
                     sprite:sprite,
-                    number:number
+                    number:number,
+                    spriteError:spriteError
                 });
-
-    },[pokemonContext])
+    },[pokemon])
 
 
     return (
@@ -32,10 +34,16 @@ const Pokedex = () =>{
                 <div className="upperPartRed">
                     <div className="upperPart">
                         <div className="bigBallWhite">
-                            <div className="bigBallBlue">
-                                <div className="square"/>
-                                <div className="smallBallBlue"/>
-                         </div>
+                           {
+                           blinkPokedex ? <div className={"bigBallBlueAnimated"}>
+                            <div className="square"/>
+                            <div className="smallBallBlue"/>
+                            </div>
+                            :
+                            <div className={"bigBallBlue"}>
+                            <div className="square"/>
+                            <div className="smallBallBlue"/>
+                            </div>}
                         </div>
                     </div>
             
@@ -62,7 +70,8 @@ const Pokedex = () =>{
                     </div>
                     <div className='pokeSquare'>
                         <div className='pokemon'>
-                            <ImageWithSpinner src={pokemon.sprite|| ''}/>
+                            <ImageWithSpinner src={pokemonPokedex.sprite|| ''}
+                                            srcError={pokemonPokedex.spriteError || ''}/>
                         </div>
                         </div>
                         <div className="partBelow">
@@ -84,11 +93,11 @@ const Pokedex = () =>{
             </div>
             <div className='details'>
                 <div className='pokeName'>
-                    <span>{pokemon.name ? `${pokemon.name} #${pokemon?.number}` : 'Loading...'}</span>
+                    <span>{pokemonPokedex.name ? `${pokemonPokedex.name} #${pokemonPokedex?.number}` : 'Loading...'}</span>
                 </div>
                 
                 <div className='detailSquare'>
-                    <Typer text={pokemon?.entries?.length > 0 ? getEntry(pokemonContext.entries) :''}/>
+                    <Typer text={pokemonPokedex.entry}/>
                 </div>
             </div>
         </div>

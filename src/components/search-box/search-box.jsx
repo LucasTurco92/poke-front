@@ -11,23 +11,23 @@ const PokeSearch = () =>{
     const [inputItem, setInputItem] = useState('');
     const [suggestionsPokemon, setSuggestionsPokemon] = useState([]);
     const [showSuggestion,setShowSuggestion] = useState(false);
-    const { pokemonContext,setPokemonContext, pokemons } = useContext(PokemonContext);
+    const { pokemon,setPokemon, pokemons } = useContext(PokemonContext);
 
     const inputElement = useRef();
 
     const getContent = async (number)=>{
-      if(number != pokemonContext.number){
+      if(number != pokemon.number){
         const content = await getPokedex(number);
         const pokemon = {...content,number:number};
-        setPokemonContext(pokemon);
+        setPokemon(pokemon);
         setShowSuggestion(false);
+        setSuggestionsPokemon([]);
       }else{
 
-        setPokemonContext({...pokemonContext,
+        setPokemon({...pokemon,
                               number:number});
       }
 
-      setSuggestionsPokemon([]);
     };
   
      const getRandomPokemon=()=>{
@@ -63,6 +63,7 @@ const PokeSearch = () =>{
 
     return (
       <form className='searchBoxContainer'
+              spellCheck="false"
               onSubmit={handleSubmit}>
               <input 
               type='text'

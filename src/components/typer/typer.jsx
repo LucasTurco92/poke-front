@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
+import { PokemonContext } from '../../hooks/usePokemon.jsx';
 import "./typer.scss";
 
 const Typer = ({ text }) => {
   const [index, setIndex] = useState(0);
   const [typing, setTyping] = useState(false);
-
+  const { setBlinkPokedex } = useContext(PokemonContext);
+ 
   useEffect(() => {
     setIndex(0);
     setTyping(true);
@@ -22,6 +24,7 @@ const Typer = ({ text }) => {
   useEffect(() => {
     if (index === text?.length) {
       setTyping(false);
+      setBlinkPokedex(false);
     }
   }, [index, text]);
 
