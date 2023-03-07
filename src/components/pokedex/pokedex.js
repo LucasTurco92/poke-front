@@ -4,27 +4,38 @@ import './pokedex.scss'
 import ImageWithSpinner from "../ImageWithSpinner/ImageWithSpinner.jsx";
 import Typer from "../typer/typer.jsx";
 import { getRandomNumber } from "../../utils/get-pokedex.js";
+import  useSpeaker  from "../../hooks/useSpeaker.jsx";
+import Types from "../types/types.jsx";
 
 
 const Pokedex = () =>{
-    const {pokemon, blinkPokedex,setBlinkPokedex,spriteError } = useContext(PokemonContext);
+    const {pokemon, blinkPokedex,setBlinkPokedex } = useContext(PokemonContext);
     const [ pokemonPokedex, setPokemonPokedex ] = useState({name:null,
                                             entry:'',     
                                             sprite:'',
                                             spriteError:''});
+    
+    
+    const {speak} = useSpeaker();
+
     const getEntry =(entries)=>{
-        return entries[getRandomNumber(0,entries?.length-1)];
+        const entry = entries[getRandomNumber(0,entries?.length-1)];
+
+        if(entry) speak(entry);
+        return entry;
     } 
 
     useEffect(()=>{
-        const {name, sprite,number, entries= [], spriteError} =pokemon;
+        const {name, sprite,number, entries= [], spriteError,types} = pokemon;
         setBlinkPokedex(true);
         setPokemonPokedex({name: name,
                     entry: getEntry(entries), 
                     sprite:sprite,
                     number:number,
-                    spriteError:spriteError
+                    spriteError:spriteError,
+                    types:types
                 });
+
     },[pokemon])
 
 
@@ -93,12 +104,12 @@ const Pokedex = () =>{
             </div>
             <div className='details'>
                 <div className='pokeName'>
-                    <span>{pokemonPokedex.name ? `${pokemonPokedex.name} #${pokemonPokedex?.number}` : 'Loading...'}</span>
+                    <span>{pokemonPokedex.name ? `${pokemonPokedex.name} ` : 'Loading...'}</span><span>{pokemonPokedex?.number?` #${pokemonPokedex?.number}`:''}</span>
                 </div>
-                
                 <div className='detailSquare'>
                     <Typer text={pokemonPokedex.entry}/>
                 </div>
+                <Types types={pokemonPokedex.types || []}/>
             </div>
         </div>
     )

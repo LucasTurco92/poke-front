@@ -7,6 +7,21 @@ import srcIcon from '../../assets/images/searchIco.svg';
 const max = process.env.POKEMON_MAX;
 const min = 1;
 
+const useField = ({type}) =>{
+  const [value, setValue] = useState('');
+  
+  const onChange = event =>{
+    setValue(event.target.value)
+  }
+  
+  return {
+    type,
+    value,
+    onChange
+  }
+
+}
+
 const PokeSearch = () =>{
     const [inputItem, setInputItem] = useState('');
     const [suggestionsPokemon, setSuggestionsPokemon] = useState([]);
@@ -24,8 +39,7 @@ const PokeSearch = () =>{
         setSuggestionsPokemon([]);
       }else{
 
-        setPokemon({...pokemon,
-                              number:number});
+        setPokemon({...pokemon,number:number});
       }
 
     };

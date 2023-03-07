@@ -11,7 +11,7 @@ const Home = () => {
   return (<>
             <PokemonProvider>
               <div className="content" style={{
-              backgroundColor:'#80aad1',
+              backgroundColor:'transparent',
               backgroundImage:`url(${mew})` , backgroundAttachment:"fixed",
               backgroundRepeat:' no-repeat',
               backgroundPosition: '2% 2%',

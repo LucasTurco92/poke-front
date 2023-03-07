@@ -1,0 +1,17 @@
+.types{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: flex-start;
+   flex-direction: column;
+   padding:10px;
+   margin-top:10px;
+}
+
+
+@media screen and (max-width: 1024px) {
+   .types {
+      align-items: center;
+      margin-top:0;
+   }
+}
