@@ -12,7 +12,7 @@ const useSpeaker = () => {
             utterance.voice = voices[5];
             utterance.text = text;
             utterance.volume = 0.8;
-            console.log(utterance);
+            //console.log(utterance);
             window.speechSynthesis.speak(utterance);
         }
     };
@@ -31,8 +31,6 @@ const useSpeaker = () => {
       };
     }
   }, []);
-
-
 
   return { isSupported, voices, speak };
 };
