@@ -15,7 +15,10 @@ code {
     padding: 0;
     box-sizing: border-box;
 }
-
+.back-ground-particles{
+position: relative;
+z-index: 0;
+}
 :root {
     --lightBlue: rgb(117, 211, 247);
     --blue: rgb(18, 134, 193);

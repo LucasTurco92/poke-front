@@ -4,7 +4,7 @@ const endpoint = process.env.POKEMON_ENDPOINT;
 
 const PokemonContext = createContext();
 
-const PokemonProvider = (props) => {
+const PokemonProvider = ({children}) => {
     const [pokemon, setPokemon] = useState({name:'',sprite:''});
     const [pokemons, setPokemons] = useState([]);
     const [blinkPokedex, setBlinkPokedex] = useState([]);
@@ -19,7 +19,7 @@ const PokemonProvider = (props) => {
 
     return (
         <PokemonContext.Provider value={{pokemon, setPokemon,pokemons,blinkPokedex, setBlinkPokedex}}>
-            {props.children}
+            {children}
         </PokemonContext.Provider>
     )
 };

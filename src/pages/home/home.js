@@ -1,14 +1,14 @@
-import React from "react";
+import React,{ useCallback } from "react";
 import './home.scss';
-import pokeball from '../../assets/images/logo192.png';
 import mew from '../../assets/images/mew.png';
 import Pokedex from "../../components/pokedex/pokedex";
 import PokeSearch from "../../components/search-box/search-box.jsx";
 import { PokemonProvider } from "../../hooks/usePokemon.jsx";
-
+import { PokemonTeam } from "../../components/pokemonTeam/pokemonTeam.jsx";
+import pikachu from '../../../src/assets/images/pika.gif';
 const Home = () => {
 
-  return (<>
+  return (<> 
             <PokemonProvider>
               <div className="content" style={{
               backgroundColor:'transparent',
@@ -19,6 +19,15 @@ const Home = () => {
                   }}>
                 <PokeSearch/>
                 <Pokedex/>
+                <PokemonTeam/>
+              <div
+               style={{
+                backgroundImage:`url(${pikachu})` , backgroundAttachment:"fixed",
+                backgroundRepeat:'no-repeat',
+                backgroundPosition: 'right bottom',
+                backgroundSize: '200px',
+                position:"absolute"
+              }}/>
               </div>
             </PokemonProvider>
           </>)

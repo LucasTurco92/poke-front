@@ -12,7 +12,6 @@ const useSpeaker = () => {
             utterance.voice = voices[5];
             utterance.text = text;
             utterance.volume = 0.8;
-            //console.log(utterance);
             window.speechSynthesis.speak(utterance);
         }
     };
