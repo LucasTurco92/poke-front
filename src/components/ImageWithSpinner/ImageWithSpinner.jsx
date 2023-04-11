@@ -1,17 +1,16 @@
-import React, { useState,useEffect } from 'react';
-import  './ImageWithSpinner.scss';
+import React, { useState, useEffect } from 'react'
+import './ImageWithSpinner.css'
 
-function ImageWithSpinner({ src, srcError }) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [image, setIImage] = useState();
+function ImageWithSpinner ({ src, srcError }) {
+  const [isLoading, setIsLoading] = useState(true)
+  const [image, setIImage] = useState()
 
   useEffect(() => {
-    const img = new Image();
-    img.src = src;
-    img.onload = () => {setIsLoading(false);setIImage(src)};
-    img.onerror = () => {setIsLoading(false);setIImage(srcError)}
-
-  }, [src]);
+    const img = new Image()
+    img.src = src
+    img.onload = () => { setIsLoading(false); setIImage(src) }
+    img.onerror = () => { setIsLoading(false); setIImage(srcError) }
+  }, [src])
 
   return (
     <>
@@ -22,7 +21,7 @@ function ImageWithSpinner({ src, srcError }) {
         style={{ display: isLoading ? 'none' : 'block' }}
       />
     </>
-  );
+  )
 }
 
-export default ImageWithSpinner;
+export default ImageWithSpinner

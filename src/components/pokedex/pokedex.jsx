@@ -1,63 +1,62 @@
-import React,{ useContext,useEffect,useState }  from "react";
-import { PokemonContext } from "../../hooks/usePokemon.jsx";
+import React, { useContext, useEffect, useState } from 'react'
+import { PokemonContext } from '../../hooks/usePokemon.jsx'
 import './pokedex.scss'
-import ImageWithSpinner from "../ImageWithSpinner/ImageWithSpinner.jsx";
-import Typer from "../typer/typer.jsx";
-import { getRandomNumber } from "../../utils/get-pokedex.js";
-import  useSpeaker  from "../../hooks/useSpeaker.jsx";
-import Types from "../types/types.jsx";
+import ImageWithSpinner from '../ImageWithSpinner/ImageWithSpinner.jsx'
+import Typer from '../typer/typer.jsx'
+import { getRandomNumber } from '../../utils/get-pokedex.js'
+import useSpeaker from '../../hooks/useSpeaker.jsx'
+import Types from '../types/types.jsx'
 
+const Pokedex = () => {
+  const { pokemon, blinkPokedex, setBlinkPokedex } = useContext(PokemonContext)
+  const [pokemonPokedex, setPokemonPokedex] = useState({
+    name: null,
+    entry: '',
+    sprite: '',
+    spriteError: ''
+  })
 
-const Pokedex = () =>{
-    const {pokemon, blinkPokedex,setBlinkPokedex } = useContext(PokemonContext);
-    const [ pokemonPokedex, setPokemonPokedex ] = useState({name:null,
-                                            entry:'',     
-                                            sprite:'',
-                                            spriteError:''});
-    
-    
-    const {speak} = useSpeaker();
+  const { speak } = useSpeaker()
 
-    const getEntry =(entries)=>{
-        const entry = entries[getRandomNumber(0,entries?.length-1)];
+  const getEntry = (entries) => {
+    const entry = entries[getRandomNumber(0, entries?.length - 1)]
 
-        if(entry) speak(entry);
-        return entry;
-    } 
+    if (entry) speak(entry)
+    return entry
+  }
 
-    useEffect(()=>{
-        const {name, sprite,number, entries= [], spriteError,types} = pokemon;
-        setBlinkPokedex(true);
-        setPokemonPokedex({name: name,
-                    entry: getEntry(entries), 
-                    sprite:sprite,
-                    number:number,
-                    spriteError:spriteError,
-                    types:types
-                });
+  useEffect(() => {
+    const { name, sprite, number, entries = [], spriteError, types } = pokemon
+    setBlinkPokedex(true)
+    setPokemonPokedex({
+      name,
+      entry: getEntry(entries),
+      sprite,
+      number,
+      spriteError,
+      types
+    })
+  }, [pokemon])
 
-    },[pokemon])
-
-
-    return (
+  return (
         <div className='pokedexContainer'>
             <div className="pokedexMark">
                 <div className="upperPartRed">
                     <div className="upperPart">
                         <div className="bigBallWhite">
                            {
-                           blinkPokedex ? <div className={"bigBallBlueAnimated"}>
+                           blinkPokedex
+                             ? <div className={'bigBallBlueAnimated'}>
                             <div className="square"/>
                             <div className="smallBallBlue"/>
                             </div>
-                            :
-                            <div className={"bigBallBlue"}>
+                             : <div className={'bigBallBlue'}>
                             <div className="square"/>
                             <div className="smallBallBlue"/>
                             </div>}
                         </div>
                     </div>
-            
+
                     <div className="upperPart">
                         <div className="smallBall">
                             <div className="square"/>
@@ -81,7 +80,7 @@ const Pokedex = () =>{
                     </div>
                     <div className='pokeSquare'>
                         <div className='pokemon'>
-                            <ImageWithSpinner src={pokemonPokedex.sprite|| ''}
+                            <ImageWithSpinner src={pokemonPokedex.sprite || ''}
                                             srcError={pokemonPokedex.spriteError || ''}/>
                         </div>
                         </div>
@@ -104,7 +103,7 @@ const Pokedex = () =>{
             </div>
             <div className='details'>
                 <div className='pokeName'>
-                    <span>{pokemonPokedex.name ? `${pokemonPokedex.name} ` : 'Loading...'}</span><span>{pokemonPokedex?.number?` #${pokemonPokedex?.number}`:''}</span>
+                    <span>{pokemonPokedex.name ? `${pokemonPokedex.name} ` : 'Loading...'}</span><span>{pokemonPokedex?.number ? ` #${pokemonPokedex?.number}` : ''}</span>
                 </div>
                 <div className='detailSquare'>
                     <Typer text={pokemonPokedex.entry}/>
@@ -112,9 +111,7 @@ const Pokedex = () =>{
                 <Types types={pokemonPokedex.types || []}/>
             </div>
         </div>
-    )
-
+  )
 }
 
-export default Pokedex;
-
+export default Pokedex

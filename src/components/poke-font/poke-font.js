@@ -1,10 +1,8 @@
-import React  from "react";
-import './poke-font.scss'
+import React from 'react'
+import './poke-font.css'
 
-const PokeFont = ({text}) =>{
-    return <span className='font'>{text}</span>
-
+const PokeFont = ({ text }) => {
+  return <span className='font'>{text}</span>
 }
 
-export default PokeFont;
-
+export default PokeFont

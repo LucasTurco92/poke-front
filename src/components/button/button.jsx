@@ -1,10 +1,9 @@
-import React from "react"
-import './button.scss'
-export const Button = ({action,value}) =>{
+import React from 'react'
+import './button.css'
+export const Button = ({ action, value }) => {
+  const handleAction = () => {
+    action()
+  }
 
-const handleAction = () =>{
-    action();
-}
-
-    return(<div className='commonButton' onClick={handleAction}>{value}</div>)
+  return (<div className='commonButton' onClick={handleAction}>{value}</div>)
 }
